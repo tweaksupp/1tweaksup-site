@@ -245,7 +245,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
       <div class="monitor" aria-label="Exemple de courbe de frametime avant et après optimisation">
         <div class="mon-head">
-          <span><span class="dot" id="r-dot"></span><span id="r-label">APRÈS OPTI · ms</span></span>
+          <span><span class="dot" id="r-dot"></span><span id="r-label">APRÈS OPTI WINDOWS · ms</span></span>
           <div class="toggle" role="group" aria-label="Comparer">
             <button type="button" id="btn-before" aria-pressed="false">Avant</button>
             <button type="button" id="btn-after" aria-pressed="true">Après</button>
@@ -257,7 +257,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           <div><small>Latence</small><b id="r-b">En baisse</b></div>
           <div><small>Stabilité</small><b id="r-c">Bien plus</b></div>
         </div>
-        <p class="mon-note">Résultat d'un client sur Fortnite après l'optimisation Windows. La courbe est une illustration, et les gains varient selon ton PC.</p>
+        <p class="mon-note">Résultat d'un client sur Fortnite avec l'optimisation Windows seule (sans BIOS, RAM ni overclock). La courbe est une illustration, et les gains varient selon ton PC.</p>
       </div>
     </div>
   </section>
@@ -366,7 +366,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
       <div class="stats">
         <div class="stat"><b>—</b><small>PC optimisés</small></div>
-        <div class="stat"><b>+80 à 120</b><small>FPS gagnés par un client</small></div>
+        <div class="stat"><b>+80 à 120</b><small>FPS gagnés par un client, avec l'optimisation Windows seule</small></div>
         <div class="stat"><b>12–36 h</b><small>Délai de réponse</small></div>
         <div class="stat"><b>1 mois</b><small>Suivi inclus</small></div>
       </div>
@@ -465,7 +465,7 @@ if (DISCORD_URL) {
     document.getElementById("btn-after").setAttribute("aria-pressed", m==="after");
     const v = m === "before"
       ? ["De base", "Élevée", "Saccades", "PC NON OPTI · ms", "var(--rose)"]
-      : ["+80 à 120", "En baisse", "Bien plus", "APRÈS OPTI · ms", "var(--ok)"];
+      : ["+80 à 120", "En baisse", "Bien plus", "APRÈS OPTI WINDOWS · ms", "var(--ok)"];
     document.getElementById("r-a").textContent = v[0];
     document.getElementById("r-b").textContent = v[1];
     document.getElementById("r-c").textContent = v[2];
