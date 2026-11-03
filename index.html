@@ -245,7 +245,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
       <div class="monitor" aria-label="Exemple de courbe de frametime avant et après optimisation">
         <div class="mon-head">
-          <span><span class="dot"></span>FRAMETIME · ms</span>
+          <span><span class="dot" id="r-dot"></span><span id="r-label">APRÈS OPTI · ms</span></span>
           <div class="toggle" role="group" aria-label="Comparer">
             <button type="button" id="btn-before" aria-pressed="false">Avant</button>
             <button type="button" id="btn-after" aria-pressed="true">Après</button>
@@ -253,9 +253,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         </div>
         <canvas id="ft" width="600" height="170" aria-hidden="true"></canvas>
         <div class="readout">
-          <div><small>Gain FPS</small><b>+80 à 120</b></div>
-          <div><small>Latence</small><b>En baisse</b></div>
-          <div><small>Stabilité</small><b>Bien plus</b></div>
+          <div><small>FPS</small><b id="r-a">+80 à 120</b></div>
+          <div><small>Latence</small><b id="r-b">En baisse</b></div>
+          <div><small>Stabilité</small><b id="r-c">Bien plus</b></div>
         </div>
         <p class="mon-note">Résultat d'un client sur Fortnite après l'optimisation Windows. La courbe est une illustration, et les gains varient selon ton PC.</p>
       </div>
@@ -463,6 +463,14 @@ if (DISCORD_URL) {
     mode = m; fill();
     document.getElementById("btn-before").setAttribute("aria-pressed", m==="before");
     document.getElementById("btn-after").setAttribute("aria-pressed", m==="after");
+    const v = m === "before"
+      ? ["De base", "Élevée", "Saccades", "PC NON OPTI · ms", "var(--rose)"]
+      : ["+80 à 120", "En baisse", "Bien plus", "APRÈS OPTI · ms", "var(--ok)"];
+    document.getElementById("r-a").textContent = v[0];
+    document.getElementById("r-b").textContent = v[1];
+    document.getElementById("r-c").textContent = v[2];
+    document.getElementById("r-label").textContent = v[3];
+    const d = document.getElementById("r-dot"); d.style.background = v[4]; d.style.boxShadow = "0 0 10px " + v[4];
     draw();
   }
   function draw(){
