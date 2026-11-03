@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="1tweaksup : optimisation PC gaming à distance. Windows, BIOS, overclock, nettoyage et setup streaming. Plus de FPS, moins de latence.">
+<meta name="description" content="TweakUpp : optimisation PC gaming à distance pour Fortnite. Plus de FPS, moins de latence.">
+<link rel="icon" type="image/png" href="logo.png">
 <meta name="theme-color" content="#0d0a14">
-<title>1tweaksup - Optimisation PC Gaming</title>
+<title>TweakUpp - Optimisation PC Gaming</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -42,6 +43,7 @@ a{color:inherit}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb, var(--bg) 82%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
 .logo{font-family:var(--font-display);font-weight:800;font-size:1.15rem;letter-spacing:-.01em;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo .mark{display:block;width:34px;height:34px;border-radius:9px;box-shadow:0 0 18px -4px var(--glow)}
 .logo .one{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--violet),var(--rose));color:var(--bg);font-size:.95rem}
 .logo .sup{background:linear-gradient(90deg,var(--violet),var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent}
 nav.links{display:flex;gap:22px;font-size:.92rem;color:var(--muted)}
@@ -101,6 +103,8 @@ h2{font-family:var(--font-display);font-weight:700;font-size:clamp(1.6rem,3.4vw,
 @media (max-width:560px){.services{grid-template-columns:1fr}.svc,.svc:nth-child(4),.svc:nth-child(5){grid-column:span 1}}
 .svc .ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(166,120,255,.12);color:var(--rose)}
 .svc .ico svg{width:24px;height:24px}
+.svc .state{align-self:flex-start;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.svc .state.on{border-color:var(--ok);color:var(--ok)}
 .svc h3{font-family:var(--font-display);font-weight:700;font-size:1.08rem;margin:4px 0 0}
 .svc p{color:var(--muted);margin:0;font-size:.95rem}
 .svc ul{list-style:none;padding:0;margin:auto 0 0;display:flex;flex-wrap:wrap;gap:6px}
@@ -164,7 +168,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
 <header class="top">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="1tweaksup, accueil"><span class="one">1</span><span>tweak<span class="sup">sup</span></span></a>
+    <a class="logo" href="#top" aria-label="TweakUpp, accueil"><img class="mark" src="data:image/png;base64,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" alt="" width="34" height="34"><span>Tweak<span class="sup">Upp</span></span></a>
     <nav class="links" aria-label="Navigation">
       <a href="#services">Services</a>
       <a href="#methode">Méthode</a>
@@ -181,7 +185,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <div>
         <div class="eyebrow">Optimisation PC gaming · à distance</div>
         <h1>Plus de FPS. <em>Moins de latence.</em> Zéro galère.</h1>
-        <p class="lead">1tweaksup règle ton PC pièce par pièce : Windows, BIOS, overclock, nettoyage et setup stream. Tout se fait à distance via Discord, avec un point de restauration avant chaque modification.</p>
+        <p class="lead">TweakUpp règle ton PC pièce par pièce : Windows, BIOS, overclock, nettoyage et setup stream. Tout se fait à distance via Discord, avec un point de restauration avant chaque modification.</p>
         <div class="cta-row">
           <a class="btn btn-main discord-link" href="#discord">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18 18 0 0 0-5.6 0L8.6 3a19.6 19.6 0 0 0-4.9 1.5C.6 9 0 13.6.3 18.1a19.8 19.8 0 0 0 6 3l1.3-2a12.7 12.7 0 0 1-2-1l.5-.4a14 14 0 0 0 11.8 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.7 19.7 0 0 0 6-3c.5-5.2-.8-9.7-3.4-13.7ZM8.5 15.3c-1.2 0-2.1-1-2.1-2.3s.9-2.3 2.1-2.3 2.2 1 2.1 2.3c0 1.3-.9 2.3-2.1 2.3Zm7 0c-1.2 0-2.1-1-2.1-2.3s.9-2.3 2.1-2.3 2.2 1 2.1 2.3c0 1.3-.9 2.3-2.1 2.3Z"/></svg>
@@ -190,7 +194,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           <a class="btn btn-ghost" href="#services">Voir les services</a>
         </div>
         <div class="chips" aria-label="Jeux pris en charge">
-          <span>Valorant</span><span>CS2</span><span>Fortnite</span><span>Warzone</span><span>Apex</span>
+          <span>Fortnite</span><span>D'autres jeux bientôt</span>
         </div>
       </div>
 
@@ -222,30 +226,35 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <div class="services">
         <article class="svc">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg></div>
+          <span class="state on">Disponible</span>
           <h3>Optimisation Windows</h3>
           <p>Services inutiles coupés, démarrage allégé, plan d'alimentation et réglages réseau pensés pour le jeu.</p>
           <ul><li>Services</li><li>Plan d'alim.</li><li>Réseau</li><li>GPU</li></ul>
         </article>
         <article class="svc">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/><rect x="9" y="9" width="6" height="6"/></svg></div>
+          <span class="state">Bientôt</span>
           <h3>Réglages BIOS</h3>
           <p>Activation du profil mémoire, réglages CPU et options qui brident les perfs, avec sauvegarde du profil d'origine.</p>
           <ul><li>XMP / EXPO</li><li>Resizable BAR</li><li>C-States</li></ul>
         </article>
         <article class="svc">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+          <span class="state">Bientôt</span>
           <h3>Overclock</h3>
           <p>OC CPU, GPU et RAM testé en stabilité, avec contrôle des températures pour garder un PC fiable au quotidien.</p>
           <ul><li>CPU</li><li>GPU</li><li>RAM</li><li>Tests stabilité</li></ul>
         </article>
         <article class="svc">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/><path d="M10 10v6M14 10v6"/></svg></div>
+          <span class="state">Bientôt</span>
           <h3>Nettoyage</h3>
           <p>Suppression des logiciels préinstallés, fichiers temporaires et programmes qui tournent en fond sans raison. Ton PC respire.</p>
           <ul><li>Bloatwares</li><li>Démarrage</li><li>Pilotes propres</li></ul>
         </article>
         <article class="svc">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="5" width="15" height="12" rx="2"/><path d="m17 10 5-3v10l-5-3"/><circle cx="9.5" cy="11" r="2.5"/></svg></div>
+          <span class="state">Bientôt</span>
           <h3>Setup streaming</h3>
           <p>Configuration OBS (encodeur, bitrate, scènes, audio) pour streamer sans perdre de FPS en jeu.</p>
           <ul><li>OBS</li><li>NVENC / AMF</li><li>Bitrate</li><li>Scènes</li></ul>
@@ -332,7 +341,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18 18 0 0 0-5.6 0L8.6 3a19.6 19.6 0 0 0-4.9 1.5C.6 9 0 13.6.3 18.1a19.8 19.8 0 0 0 6 3l1.3-2a12.7 12.7 0 0 1-2-1l.5-.4a14 14 0 0 0 11.8 0l.5.4c-.6.4-1.3.7-2 1l1.3 2a19.7 19.7 0 0 0 6-3c.5-5.2-.8-9.7-3.4-13.7ZM8.5 15.3c-1.2 0-2.1-1-2.1-2.3s.9-2.3 2.1-2.3 2.2 1 2.1 2.3c0 1.3-.9 2.3-2.1 2.3Zm7 0c-1.2 0-2.1-1-2.1-2.3s.9-2.3 2.1-2.3 2.2 1 2.1 2.3c0 1.3-.9 2.3-2.1 2.3Z"/></svg>
             Rejoindre le Discord
           </a>
-          <small>Réponse en général sous 24 h.</small>
+          <small>Réponse entre 12 et 36 h maximum.</small>
         </div>
       </div>
     </div>
@@ -341,7 +350,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 1tweaksup · Optimisation PC gaming</span>
+    <span>© 2026 TweakUpp · Optimisation PC gaming</span>
     <span>Windows · BIOS · Overclock · Nettoyage · Stream</span>
   </div>
 </footer>
