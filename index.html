@@ -211,6 +211,23 @@ details p{color:var(--muted);margin:0 0 16px}
   footer{padding-bottom:96px}
 }
 
+/* Bandeau compte à rebours */
+.promo{border-bottom:1px solid var(--line);background:radial-gradient(80% 160% at 0% 0%, rgba(166,120,255,.22), transparent 60%), radial-gradient(80% 160% at 100% 100%, rgba(255,122,198,.18), transparent 60%), var(--bg-2)}
+.promo-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 32px;padding-block:22px}
+.promo-txt{display:flex;flex-direction:column;gap:4px;min-width:0}
+.promo-txt p{margin:0;font-family:var(--font-display);font-weight:700;font-size:clamp(1.05rem,2.4vw,1.35rem)}
+.promo-txt p s{color:var(--muted);font-weight:500;font-size:.8em;margin-right:4px}
+.promo-txt p b{background:linear-gradient(90deg,var(--violet),var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent}
+.promo-txt small{color:var(--muted);font-size:.82rem}
+.clock{display:flex;align-items:flex-start;gap:clamp(4px,1.2vw,10px)}
+.unit{display:flex;flex-direction:column;align-items:center;gap:6px}
+.unit small{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.digits{display:flex;gap:4px}
+.d{position:relative;display:grid;place-items:center;width:clamp(30px,7.2vw,48px);height:clamp(42px,10vw,64px);border-radius:8px;border:1px solid var(--line);background:linear-gradient(180deg,var(--surface) 0 50%,var(--bg) 50% 100%);font-family:var(--font-mono);font-weight:600;font-size:clamp(1.35rem,4.6vw,2.2rem);font-variant-numeric:tabular-nums;color:var(--fg);box-shadow:0 10px 24px -14px var(--glow)}
+.d::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.55)}
+.sep{font-family:var(--font-mono);font-weight:600;font-size:clamp(1.2rem,4vw,2rem);color:var(--rose);line-height:clamp(42px,10vw,64px)}
+@media (max-width:640px){.promo-in{flex-direction:column;align-items:stretch;text-align:center}.promo-txt{align-items:center}.clock{justify-content:center}.promo-in .btn{justify-content:center}}
+
 footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:.85rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </style>
@@ -233,6 +250,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </header>
 
 <main id="top">
+  <section class="promo" id="promo" aria-label="Offre d'ouverture">
+    <div class="wrap promo-in">
+      <div class="promo-txt">
+        <span class="eyebrow">🔥 Offre d'ouverture</span>
+        <p>Optimisation Windows à <s>14,99 €</s> <b>5 €</b></p>
+        <small id="promo-status">Le compte à rebours démarre à l'ouverture officielle</small>
+      </div>
+      <div class="clock" id="clock" aria-label="Compte à rebours de l'offre"><div class="unit"><div class="digits" data-u="d"><span class="d">0</span><span class="d">7</span></div><small>jours</small></div><span class="sep">:</span><div class="unit"><div class="digits" data-u="h"><span class="d">0</span><span class="d">0</span></div><small>heures</small></div><span class="sep">:</span><div class="unit"><div class="digits" data-u="m"><span class="d">0</span><span class="d">0</span></div><small>min</small></div><span class="sep">:</span><div class="unit"><div class="digits" data-u="s"><span class="d">0</span><span class="d">0</span></div><small>sec</small></div></div>
+      <a class="btn btn-main small" href="#offres">J'en profite</a>
+    </div>
+  </section>
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
@@ -455,20 +483,30 @@ const DISCORD_URL = "https://discord.gg/VhVEHvJnXa";
 (function(){
   const START = null;
   const cd = document.getElementById("cd");
-  if (!cd || START === null) return;
-  const END = START + 7 * 864e5;
   const pad = n => String(n).padStart(2, "0");
+  function paint(left){
+    const v = { d: Math.floor(left / 864e5), h: Math.floor(left / 36e5) % 24, m: Math.floor(left / 6e4) % 60, s: Math.floor(left / 1e3) % 60 };
+    document.querySelectorAll("#clock .digits").forEach(el => {
+      const t = pad(v[el.dataset.u]); const ds = el.querySelectorAll(".d");
+      ds[0].textContent = t[0]; ds[1].textContent = t[1];
+    });
+    return v;
+  }
+  if (START === null) { paint(7 * 864e5); return; }
+  const END = START + 7 * 864e5;
+  const st = document.getElementById("promo-status"); if (st) st.textContent = "Fin de l'offre dans :";
   function tick(){
     const left = END - Date.now();
     if (left <= 0) {
-      cd.hidden = true;
+      const p = document.getElementById("promo"); if (p) p.hidden = true;
+      if (cd) cd.hidden = true;
       document.getElementById("offer-tag").textContent = "Disponible";
       document.getElementById("offer-price").innerHTML = "14,99 €<span>Paiement via PayPal · suivi 1 mois inclus</span>";
       const s = document.getElementById("sticky-link"); if (s) s.textContent = "Commander sur Discord · 14,99 €";
       clearInterval(timer); return;
     }
-    const d = Math.floor(left / 864e5), h = Math.floor(left / 36e5) % 24, m = Math.floor(left / 6e4) % 60, s = Math.floor(left / 1e3) % 60;
-    cd.innerHTML = "Fin de l'offre dans <b>" + d + " j " + pad(h) + " h " + pad(m) + " min " + pad(s) + " s</b>";
+    const v = paint(left);
+    if (cd) cd.innerHTML = "Fin de l'offre dans <b>" + v.d + " j " + pad(v.h) + " h " + pad(v.m) + " min " + pad(v.s) + " s</b>";
   }
   const timer = setInterval(tick, 1000); tick();
 })();
