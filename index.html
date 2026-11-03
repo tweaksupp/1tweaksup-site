@@ -23,6 +23,7 @@
   --rose:#ff7ac6;
   --glow:rgba(190,110,255,.35);
   --ok:#7cf2c4;
+  --warn:#ffc861;
   --font-display:"Unbounded", "Arial Black", system-ui, sans-serif;
   --font-body:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono:"JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
@@ -116,6 +117,11 @@ h2{font-family:var(--font-display);font-weight:700;font-size:clamp(1.6rem,3.4vw,
 .step p{color:var(--muted);margin:0;font-size:.94rem}
 
 /* Offers */
+.alire{max-width:860px;margin:0 0 24px;padding:20px 24px;border-radius:16px;border:1px solid var(--warn);background:rgba(255,200,97,.07)}
+.alire h3{margin:0 0 12px;font-family:var(--font-display);font-size:1rem;letter-spacing:.04em;color:var(--warn)}
+.alire ul{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--fg);font-size:.95rem}
+.alire li::marker{color:var(--warn)}
+.alire a{color:var(--warn)}
 .offers{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:860px}
 .offer.soon{opacity:.85}
 @media (max-width:900px){.offers{grid-template-columns:1fr}}
@@ -269,6 +275,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         <div><div class="eyebrow">Offres</div><h2>Choisis ta formule</h2></div>
         <p>Une offre disponible pour l'instant, d'autres arrivent bientôt.</p>
       </div>
+      <aside class="alire" aria-label="À lire avant de commander">
+        <h3><span aria-hidden="true">⚠️</span> À LIRE AVANT DE COMMANDER</h3>
+        <ul>
+          <li>Fais un <b>UserDiag</b> (<a href="https://userdiag.com/download" target="_blank" rel="noopener">userdiag.com</a>, test rapide d'environ 5 min) et envoie le lien dans ton ticket.</li>
+          <li>J'optimise uniquement les <b>PC pas déjà optimisés</b>. Sinon, la commande peut être refusée.</li>
+          <li>Paiement <b>uniquement via PayPal</b>. <b>Aucun remboursement</b> après l'achat.</li>
+          <li><b>Suivi 1 mois</b> inclus pour les problèmes liés à l'optimisation. Il est annulé si tu modifies, supprimes ou désactives un seul paramètre.</li>
+        </ul>
+      </aside>
       <div class="offers">
         <article class="offer featured">
           <span class="tag">Disponible</span>
