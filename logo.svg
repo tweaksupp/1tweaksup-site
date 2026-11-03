@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d08cff"/>
+      <stop offset="0.55" stop-color="#9b4dff"/>
+      <stop offset="1" stop-color="#6a2cf0"/>
+    </linearGradient>
+    <radialGradient id="bg" cx="0.5" cy="0.55" r="0.6">
+      <stop offset="0" stop-color="#160a2a"/>
+      <stop offset="1" stop-color="#05030c"/>
+    </radialGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="110" fill="url(#bg)"/>
+  <rect x="16" y="16" width="480" height="480" rx="110" fill="none" stroke="#2a1a44" stroke-width="4"/>
+  <g filter="url(#glow)" fill="none" stroke="url(#g)" stroke-width="22" stroke-linejoin="miter" stroke-miterlimit="10">
+    <!-- flèche centrale -->
+    <path d="M256 128 L186 318 L326 318 Z"/>
+    <path d="M256 218 L256 300" stroke-width="12"/>
+    <!-- branche gauche -->
+    <path d="M178 266 L92 214 L150 346 L222 346"/>
+    <!-- branche droite -->
+    <path d="M334 266 L420 214 L362 346 L290 346"/>
+  </g>
+  <!-- pointe du bas -->
+  <path filter="url(#glow)" d="M256 322 L280 346 L256 404 L232 346 Z" fill="url(#g)"/>
+</svg>
