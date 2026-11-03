@@ -253,11 +253,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         </div>
         <canvas id="ft" width="600" height="170" aria-hidden="true"></canvas>
         <div class="readout">
-          <div><small>FPS moy.</small><b id="r-fps">—</b></div>
-          <div><small>1% low</small><b id="r-low">—</b></div>
-          <div><small>Latence</small><b id="r-lat">—<i>ms</i></b></div>
+          <div><small>Gain FPS</small><b>+80 à 120</b></div>
+          <div><small>Latence</small><b>En baisse</b></div>
+          <div><small>Stabilité</small><b>Bien plus</b></div>
         </div>
-        <p class="mon-note">Exemple illustratif. Les gains réels dépendent de ton matériel et de ton jeu.</p>
+        <p class="mon-note">Résultat d'un client sur Fortnite après l'optimisation Windows. La courbe est une illustration, et les gains varient selon ton PC.</p>
       </div>
     </div>
   </section>
@@ -366,7 +366,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
       <div class="stats">
         <div class="stat"><b>—</b><small>PC optimisés</small></div>
-        <div class="stat"><b>—</b><small>FPS gagnés en moyenne</small></div>
+        <div class="stat"><b>+80 à 120</b><small>FPS gagnés par un client</small></div>
         <div class="stat"><b>12–36 h</b><small>Délai de réponse</small></div>
         <div class="stat"><b>1 mois</b><small>Suivi inclus</small></div>
       </div>
@@ -463,9 +463,6 @@ if (DISCORD_URL) {
     mode = m; fill();
     document.getElementById("btn-before").setAttribute("aria-pressed", m==="before");
     document.getElementById("btn-after").setAttribute("aria-pressed", m==="after");
-    document.getElementById("r-fps").textContent = modes[m].fps;
-    document.getElementById("r-low").textContent = modes[m].low;
-    document.getElementById("r-lat").innerHTML = modes[m].lat + "<i>ms</i>";
     draw();
   }
   function draw(){
