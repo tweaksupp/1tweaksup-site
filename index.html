@@ -182,7 +182,8 @@ details p{color:var(--muted);margin:0 0 16px}
 .ba-col{display:flex;flex-direction:column;gap:10px;min-width:0}
 .ba-shot{aspect-ratio:16/9;max-width:100%;border:1px dashed var(--line);border-radius:14px;background:var(--bg-2);display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.9rem;padding:16px}
 .ba-shot small{font-family:var(--font-mono);font-size:.72rem;color:var(--rose)}
-.ba-shot.has-img{padding:0;border-style:solid}
+.ba-shot.has-img{padding:0;border-style:solid;aspect-ratio:auto;display:block;overflow:hidden}
+.ba-shot.has-img img{display:block;height:auto;object-fit:contain}
 .ba-cap{margin:0;color:var(--muted);font-size:.88rem}
 .ba-cap b{color:var(--fg)}
 .ba-shot img{width:100%;height:100%;object-fit:cover;border-radius:13px}
