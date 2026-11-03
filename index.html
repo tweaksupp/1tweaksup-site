@@ -138,7 +138,7 @@ h2{font-family:var(--font-display);font-weight:700;font-size:clamp(1.6rem,3.4vw,
 .alire ul{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--fg);font-size:.95rem}
 .alire li::marker{color:var(--warn)}
 .alire a{color:var(--warn)}
-.offers{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:860px}
+.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .offer.soon{opacity:.85}
 @media (max-width:900px){.offers{grid-template-columns:1fr}}
 .offer{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:14px}
@@ -328,7 +328,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         </article>
         <article class="svc">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/><path d="M10 10v6M14 10v6"/></svg></div>
-          <span class="state">Bientôt</span>
+          <span class="state on">Disponible</span>
           <h3>Nettoyage</h3>
           <p>Suppression des logiciels préinstallés, fichiers temporaires et programmes qui tournent en fond sans raison. Ton PC respire.</p>
           <ul><li>Bloatwares</li><li>Démarrage</li><li>Pilotes propres</li></ul>
@@ -363,7 +363,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="wrap">
       <div class="sec-head">
         <div><div class="eyebrow">Offres</div><h2>Choisis ta formule</h2></div>
-        <p>Une offre disponible pour l'instant, d'autres arrivent bientôt.</p>
+        <p>Deux offres disponibles pour l'instant, d'autres arrivent bientôt.</p>
       </div>
       <aside class="alire" aria-label="À lire avant de commander">
         <h3><span aria-hidden="true">⚠️</span> À LIRE AVANT DE COMMANDER</h3>
@@ -383,11 +383,18 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           <ul><li>Optimisation complète de Windows</li><li>Optimisation du registre Windows</li><li>Installation et optimisation des pilotes NVIDIA</li><li>Désactivation totale des économies d'énergie</li><li>Plan d'alimentation custom</li><li>Optimisation du stockage (SSD, HDD)</li></ul>
           <a class="btn btn-main discord-link" href="#discord">Commander sur Discord</a>
         </article>
+        <article class="offer">
+          <span class="tag">Disponible</span>
+          <h3>Nettoyage</h3>
+          <div class="price">5,99 €<span>Paiement via PayPal</span></div>
+          <ul><li>Suppression des logiciels préinstallés (bloatwares)</li><li>Nettoyage des fichiers temporaires</li><li>Programmes au démarrage allégés</li><li>Programmes inutiles en arrière-plan coupés</li></ul>
+          <a class="btn btn-ghost discord-link" href="#discord">Commander sur Discord</a>
+        </article>
         <article class="offer soon">
           <span class="tag">Bientôt</span>
           <h3>Les prochaines offres</h3>
           <div class="price">Bientôt disponible<span>Les tarifs seront annoncés sur le Discord</span></div>
-          <ul><li>Réglages BIOS</li><li>Overclock CPU / GPU / RAM</li><li>Nettoyage complet</li><li>Setup streaming OBS</li></ul>
+          <ul><li>Réglages BIOS</li><li>Overclock CPU / GPU / RAM</li><li>Setup streaming OBS</li></ul>
           <a class="btn btn-ghost discord-link" href="#discord">Suivre les annonces sur Discord</a>
         </article>
       </div>
