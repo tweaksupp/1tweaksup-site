@@ -138,7 +138,7 @@ h2{font-family:var(--font-display);font-weight:700;font-size:clamp(1.6rem,3.4vw,
 .alire ul{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--fg);font-size:.95rem}
 .alire li::marker{color:var(--warn)}
 .alire a{color:var(--warn)}
-.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.offers{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .offer.soon{opacity:.85}
 @media (max-width:900px){.offers{grid-template-columns:1fr}}
 .offer{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:14px}
@@ -335,7 +335,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         </article>
         <article class="svc">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="5" width="15" height="12" rx="2"/><path d="m17 10 5-3v10l-5-3"/><circle cx="9.5" cy="11" r="2.5"/></svg></div>
-          <span class="state">Bientôt</span>
+          <span class="state on">Disponible</span>
           <h3>Setup streaming</h3>
           <p>Configuration OBS (encodeur, bitrate, scènes, audio) pour streamer sans perdre de FPS en jeu.</p>
           <ul><li>OBS</li><li>NVENC / AMF</li><li>Bitrate</li><li>Scènes</li></ul>
@@ -363,7 +363,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="wrap">
       <div class="sec-head">
         <div><div class="eyebrow">Offres</div><h2>Choisis ta formule</h2></div>
-        <p>Deux offres disponibles pour l'instant, d'autres arrivent bientôt.</p>
+        <p>Trois offres disponibles, d'autres arrivent bientôt.</p>
       </div>
       <aside class="alire" aria-label="À lire avant de commander">
         <h3><span aria-hidden="true">⚠️</span> À LIRE AVANT DE COMMANDER</h3>
@@ -390,11 +390,18 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           <ul><li>Suppression des logiciels préinstallés (bloatwares)</li><li>Nettoyage des fichiers temporaires</li><li>Programmes au démarrage allégés</li><li>Programmes inutiles en arrière-plan coupés</li></ul>
           <a class="btn btn-ghost discord-link" href="#discord">Commander sur Discord</a>
         </article>
+        <article class="offer">
+          <span class="tag">Disponible</span>
+          <h3>Setup streaming</h3>
+          <div class="price">9,99 €<span>Paiement via PayPal</span></div>
+          <ul><li>Configuration d'OBS</li><li>Réglage de l'encodeur (NVENC / AMF)</li><li>Bitrate adapté à ta connexion</li><li>Scènes et audio</li><li>Streamer sans perdre de FPS en jeu</li></ul>
+          <a class="btn btn-ghost discord-link" href="#discord">Commander sur Discord</a>
+        </article>
         <article class="offer soon">
           <span class="tag">Bientôt</span>
           <h3>Les prochaines offres</h3>
           <div class="price">Bientôt disponible<span>Les tarifs seront annoncés sur le Discord</span></div>
-          <ul><li>Réglages BIOS</li><li>Overclock CPU / GPU / RAM</li><li>Setup streaming OBS</li></ul>
+          <ul><li>Réglages BIOS</li><li>Overclock CPU / GPU / RAM</li></ul>
           <a class="btn btn-ghost discord-link" href="#discord">Suivre les annonces sur Discord</a>
         </article>
       </div>
