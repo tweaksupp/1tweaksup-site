@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>TweakUpp Admin</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700&family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#0d0a14;--bg-2:#141020;--surface:#1a1428;--line:#2c2340;--fg:#f2ecfa;--muted:#a99cbf;--violet:#a678ff;--rose:#ff7ac6;--ok:#7cf2c4;--warn:#ffc861;--bad:#ff6b81;
+--display:"Unbounded","Arial Black",sans-serif;--body:"Manrope",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}
+.wrap{max-width:980px;margin:0 auto;padding:32px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px));display:grid;gap:20px}
+header{display:flex;align-items:center;gap:12px}
+header img{width:40px;height:40px}
+h1{font-family:var(--display);font-size:1.3rem;margin:0}
+h2{font-family:var(--display);font-size:1rem;margin:0 0 12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+input,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+input{flex:1 1 220px}
+textarea{width:100%;min-height:260px;font-family:var(--mono);font-size:.85rem;resize:vertical}
+input:focus,textarea:focus,button:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+button{font:700 .9rem var(--body);border:1px solid transparent;border-radius:10px;padding:10px 16px;cursor:pointer;color:#160c22;background:linear-gradient(135deg,var(--violet),var(--rose))}
+button.ghost{background:var(--bg-2);color:var(--fg);border-color:var(--line)}
+button.small{padding:6px 10px;font-size:.78rem}
+.msg{font-size:.88rem;color:var(--muted);min-height:1.2em}
+.msg.err{color:var(--bad)} .msg.ok{color:var(--ok)}
+.newkey{font-family:var(--mono);font-size:1.3rem;letter-spacing:.06em;padding:12px 16px;border-radius:10px;border:1px dashed var(--rose);background:var(--bg-2)}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:400}
+td.k{font-family:var(--mono)}
+.pill{display:inline-block;font-family:var(--mono);font-size:.7rem;padding:2px 8px;border-radius:999px;border:1px solid}
+.pill.new{color:var(--ok);border-color:var(--ok)} .pill.used{color:var(--warn);border-color:var(--warn)} .pill.revoked{color:var(--bad);border-color:var(--bad)}
+.stats{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.88rem}
+.stats b{color:var(--fg);font-variant-numeric:tabular-nums}
+.empty{color:var(--muted);text-align:center;padding:24px}
+small.help{color:var(--muted);display:block;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><img src="logo.svg" alt=""><h1>TweakUpp · Admin</h1></header>
+
+  <section class="card" id="login">
+    <h2>Connexion</h2>
+    <form class="row" id="login-form">
+      <input id="pw" type="password" placeholder="Mot de passe admin" autocomplete="current-password" required>
+      <button type="submit">Se connecter</button>
+    </form>
+    <p class="msg" id="login-msg"></p>
+  </section>
+
+  <div id="app" hidden>
+    <section class="card">
+      <h2>Créer une clé</h2>
+      <form class="row" id="create-form">
+        <input id="note" placeholder="Pseudo du client (ex : prime WKEYZER)" maxlength="80">
+        <button type="submit">Générer une clé</button>
+      </form>
+      <div id="created" hidden style="margin-top:14px">
+        <div class="row"><span class="newkey" id="created-key"></span><button class="ghost" type="button" id="copy">Copier</button></div>
+        <small class="help">Envoie cette clé au client dans son ticket. Elle ne marchera que sur un seul PC.</small>
+      </div>
+      <p class="msg" id="create-msg"></p>
+    </section>
+
+    <section class="card">
+      <div class="row" style="justify-content:space-between;margin-bottom:8px">
+        <h2 style="margin:0">Clés</h2>
+        <div class="stats" id="stats"></div>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>Clé</th><th>Client</th><th>État</th><th>Créée</th><th>Utilisée</th><th></th></tr></thead>
+        <tbody id="rows"><tr><td colspan="6" class="empty">Chargement…</td></tr></tbody>
+      </table></div>
+      <p class="msg" id="list-msg"></p>
+    </section>
+
+    <section class="card">
+      <h2>Script d'optimisation Windows</h2>
+      <textarea id="script" spellcheck="false" placeholder="# Colle ici le script PowerShell de ton optimisation.&#10;# Il est stocké sur le serveur, jamais dans le code public du site."></textarea>
+      <div class="row" style="margin-top:10px"><button type="button" id="save">Enregistrer le script</button><span class="msg" id="save-msg"></span></div>
+      <small class="help">Ce script est envoyé au programme du client uniquement après validation de sa clé.</small>
+    </section>
+  </div>
+</div>
+
+<script>
+let PW = "";
+try { PW = sessionStorage.getItem("twk_pw") || ""; } catch {}
+const $ = id => document.getElementById(id);
+const fmt = d => d ? new Date(d).toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" }) : "—";
+const label = { new: "Neuve", used: "Utilisée", revoked: "Désactivée" };
+
+async function api(method, body) {
+  const r = await fetch("/api/admin", { method, headers: { "content-type": "application/json", "x-admin-password": PW }, body: body ? JSON.stringify(body) : undefined });
+  const data = await r.json().catch(() => ({ ok: false, error: "Réponse illisible du serveur." }));
+  if (!r.ok || !data.ok) throw Object.assign(new Error(data.error || "Erreur"), { status: r.status });
+  return data;
+}
+
+function esc(s) { return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function render(keys) {
+  const n = { new: 0, used: 0, revoked: 0 };
+  keys.forEach(k => n[k.status] = (n[k.status] || 0) + 1);
+  $("stats").innerHTML = `<span><b>${n.new}</b> neuves</span><span><b>${n.used}</b> utilisées</span><span><b>${n.revoked}</b> désactivées</span>`;
+  $("rows").innerHTML = keys.length ? keys.map(k => `
+    <tr><td class="k">${esc(k.key)}</td><td>${esc(k.note) || "—"}</td>
+    <td><span class="pill ${esc(k.status)}">${label[k.status] || esc(k.status)}</span></td>
+    <td>${fmt(k.createdAt)}</td><td>${fmt(k.usedAt)}</td>
+    <td>${k.status !== "revoked" ? `<button class="ghost small" data-act="revoke" data-key="${esc(k.key)}">Désactiver</button>` : ""}
+        ${k.status !== "new" ? `<button class="ghost small" data-act="reset" data-key="${esc(k.key)}">Réinitialiser</button>` : ""}</td></tr>`).join("")
+    : `<tr><td colspan="6" class="empty">Aucune clé pour l'instant. Crée la première au-dessus.</td></tr>`;
+}
+
+async function load() {
+  const d = await api("GET");
+  render(d.keys);
+  if (document.activeElement !== $("script")) $("script").value = d.script;
+}
+
+async function login() {
+  $("login-msg").className = "msg"; $("login-msg").textContent = "Connexion…";
+  try {
+    await load();
+    try { sessionStorage.setItem("twk_pw", PW); } catch {}
+    $("login").hidden = true; $("app").hidden = false;
+  } catch (e) {
+    $("login-msg").className = "msg err"; $("login-msg").textContent = e.message;
+    try { sessionStorage.removeItem("twk_pw"); } catch {}
+  }
+}
+
+$("login-form").addEventListener("submit", e => { e.preventDefault(); PW = $("pw").value; login(); });
+
+$("create-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  $("create-msg").className = "msg"; $("create-msg").textContent = "";
+  try {
+    const d = await api("POST", { action: "create", note: $("note").value });
+    $("created-key").textContent = d.key; $("created").hidden = false; $("note").value = "";
+    await load();
+  } catch (err) { $("create-msg").className = "msg err"; $("create-msg").textContent = err.message; }
+});
+
+$("copy").addEventListener("click", async () => {
+  const t = $("created-key").textContent;
+  try { await navigator.clipboard.writeText(t); $("copy").textContent = "Copiée"; }
+  catch { const r = document.createRange(); r.selectNodeContents($("created-key")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $("copy").textContent = "Sélectionnée"; }
+  setTimeout(() => $("copy").textContent = "Copier", 1500);
+});
+
+$("rows").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  $("list-msg").className = "msg"; $("list-msg").textContent = "";
+  try { await api("POST", { action: b.dataset.act, key: b.dataset.key }); await load(); }
+  catch (err) { $("list-msg").className = "msg err"; $("list-msg").textContent = err.message; }
+});
+
+$("save").addEventListener("click", async () => {
+  $("save-msg").className = "msg"; $("save-msg").textContent = "Enregistrement…";
+  try { await api("POST", { action: "save-script", script: $("script").value }); $("save-msg").className = "msg ok"; $("save-msg").textContent = "Script enregistré."; }
+  catch (err) { $("save-msg").className = "msg err"; $("save-msg").textContent = err.message; }
+});
+
+if (PW) login();
+</script>
+</body>
+</html>
