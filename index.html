@@ -171,6 +171,38 @@ details p{color:var(--muted);margin:0 0 16px}
 .discord-side{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
 .discord-side small{color:var(--muted);font-size:.82rem}
 
+/* Résultats / avis */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+@media (max-width:760px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.stat b{display:block;font-family:var(--font-display);font-size:1.5rem;font-variant-numeric:tabular-nums;background:linear-gradient(90deg,var(--violet),var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat small{color:var(--muted);font-size:.85rem}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px}
+@media (max-width:640px){.ba{grid-template-columns:1fr}}
+.ba-col{display:flex;flex-direction:column;gap:10px;min-width:0}
+.ba-shot{aspect-ratio:16/9;max-width:100%;border:1px dashed var(--line);border-radius:14px;background:var(--bg-2);display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.9rem;padding:16px}
+.ba-shot small{font-family:var(--font-mono);font-size:.72rem;color:var(--rose)}
+.ba-shot img{width:100%;height:100%;object-fit:cover;border-radius:13px}
+.sub{font-family:var(--font-display);font-size:1.15rem;margin:0 0 16px}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.reviews{grid-template-columns:1fr}}
+.review{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.review p{margin:0}
+.review small{color:var(--muted);font-family:var(--font-mono);font-size:.75rem}
+.review.empty{border-style:dashed;background:var(--bg-2)}
+.review.empty p{color:var(--muted)}
+/* Réseaux */
+.socials{display:flex;gap:14px}
+.socials a{color:var(--muted);text-decoration:none}
+.socials a:hover{color:var(--fg)}
+/* Bouton fixe mobile */
+.sticky-cta{display:none}
+@media (max-width:760px){
+  .sticky-cta{display:flex;justify-content:center;position:fixed;left:0;right:0;bottom:0;z-index:6;padding:10px max(16px, env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-left,0px));background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+  .sticky-cta .btn{width:100%;justify-content:center}
+  footer{padding-bottom:96px}
+}
+
 footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:.85rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </style>
@@ -185,6 +217,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <a href="#services">Services</a>
       <a href="#methode">Méthode</a>
       <a href="#offres">Offres</a>
+      <a href="#avis">Avis</a>
       <a href="#faq">FAQ</a>
     </nav>
     <a class="btn btn-main small discord-link" href="#discord">Discord</a>
@@ -324,6 +357,40 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     </div>
   </section>
 
+  <section class="block" id="avis">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Résultats</div><h2>Ce que ça donne en vrai</h2></div>
+        <p>Les vrais résultats et avis des clients TweakUpp arrivent ici au fil des optimisations.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b>—</b><small>PC optimisés</small></div>
+        <div class="stat"><b>—</b><small>FPS gagnés en moyenne</small></div>
+        <div class="stat"><b>12–36 h</b><small>Délai de réponse</small></div>
+        <div class="stat"><b>1 mois</b><small>Suivi inclus</small></div>
+      </div>
+
+      <div class="ba">
+        <div class="ba-col">
+          <span class="state">Avant</span>
+          <div class="ba-shot">Capture FPS Fortnite avant optimisation<br><small>Bientôt disponible</small></div>
+        </div>
+        <div class="ba-col">
+          <span class="state on">Après</span>
+          <div class="ba-shot">Capture FPS Fortnite après optimisation<br><small>Bientôt disponible</small></div>
+        </div>
+      </div>
+
+      <h3 class="sub">Avis clients</h3>
+      <div class="reviews">
+        <article class="review empty"><p>Les premiers avis arrivent bientôt.</p><small>Client TweakUpp</small></article>
+        <article class="review empty"><p>Tu as été optimisé par TweakUpp ? Laisse ton avis sur le Discord.</p><small>Client TweakUpp</small></article>
+        <article class="review empty"><p>Ton avis pourrait être ici.</p><small>Client TweakUpp</small></article>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="faq">
     <div class="wrap">
       <div class="sec-head"><div><div class="eyebrow">FAQ</div><h2>Questions fréquentes</h2></div></div>
@@ -360,16 +427,22 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   </section>
 </main>
 
+<div class="sticky-cta"><a class="btn btn-main discord-link" href="#discord">Commander sur Discord · dès 5 €</a></div>
+
 <footer>
   <div class="wrap">
     <span>© 2026 TweakUpp · Optimisation PC gaming</span>
-    <span>Windows · BIOS · Overclock · Nettoyage · Stream</span>
+    <span class="socials" id="socials"></span>
   </div>
 </footer>
 
 <script>
 /* Mets ton lien d'invitation Discord ici (ex : https://discord.gg/xxxxxx) */
 const DISCORD_URL = "https://discord.gg/VhVEHvJnXa";
+/* Mets tes réseaux ici (laisse vide pour les cacher) */
+const SOCIALS = { TikTok: "", Instagram: "", YouTube: "" };
+const box = document.getElementById("socials");
+if (box) Object.entries(SOCIALS).forEach(([n,u]) => { if (u) { const a = document.createElement("a"); a.href = u; a.target = "_blank"; a.rel = "noopener"; a.textContent = n; box.appendChild(a); } });
 if (DISCORD_URL) {
   document.querySelectorAll(".discord-link").forEach(a => { a.href = DISCORD_URL; a.target = "_blank"; a.rel = "noopener"; });
 }
