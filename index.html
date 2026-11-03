@@ -182,6 +182,9 @@ details p{color:var(--muted);margin:0 0 16px}
 .ba-col{display:flex;flex-direction:column;gap:10px;min-width:0}
 .ba-shot{aspect-ratio:16/9;max-width:100%;border:1px dashed var(--line);border-radius:14px;background:var(--bg-2);display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.9rem;padding:16px}
 .ba-shot small{font-family:var(--font-mono);font-size:.72rem;color:var(--rose)}
+.ba-shot.has-img{padding:0;border-style:solid}
+.ba-cap{margin:0;color:var(--muted);font-size:.88rem}
+.ba-cap b{color:var(--fg)}
 .ba-shot img{width:100%;height:100%;object-fit:cover;border-radius:13px}
 .sub{font-family:var(--font-display);font-size:1.15rem;margin:0 0 16px}
 .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -378,7 +381,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         </div>
         <div class="ba-col">
           <span class="state on">Après</span>
-          <div class="ba-shot">Capture FPS Fortnite après optimisation<br><small>Bientôt disponible</small></div>
+          <div class="ba-shot has-img"><img src="apres.jpg" alt="Capture Fortnite après optimisation : 424 FPS, ping 21" loading="lazy"></div>
+          <p class="ba-cap"><b>424 FPS</b> (entre 412 et 516) · ping 21 ms · Fortnite après l'optimisation Windows</p>
         </div>
       </div>
 
