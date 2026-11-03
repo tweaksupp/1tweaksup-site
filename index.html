@@ -116,7 +116,8 @@ h2{font-family:var(--font-display);font-weight:700;font-size:clamp(1.6rem,3.4vw,
 .step p{color:var(--muted);margin:0;font-size:.94rem}
 
 /* Offers */
-.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.offers{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:860px}
+.offer.soon{opacity:.85}
 @media (max-width:900px){.offers{grid-template-columns:1fr}}
 .offer{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:14px}
 .offer.featured{border-color:transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(135deg,var(--violet),var(--rose)) border-box;border:1px solid transparent;box-shadow:0 20px 60px -25px var(--glow)}
@@ -266,29 +267,22 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="wrap">
       <div class="sec-head">
         <div><div class="eyebrow">Offres</div><h2>Choisis ta formule</h2></div>
-        <p>Les tarifs arrivent bientôt. En attendant, demande un devis sur Discord.</p>
+        <p>Une offre disponible pour l'instant, d'autres arrivent bientôt.</p>
       </div>
       <div class="offers">
-        <article class="offer">
-          <span class="tag">Essentiel</span>
-          <h3>Optimisation Windows</h3>
-          <div class="price">5 €<span>Idéal pour un premier gain rapide</span></div>
-          <ul><li>Optimisation complète de Windows</li><li>Optimisation du registre Windows</li><li>Installation et optimisation des pilotes NVIDIA</li><li>Désactivation totale des économies d'énergie</li><li>Plan d'alimentation custom</li><li>Optimisation du stockage (SSD, HDD)</li></ul>
-          <a class="btn btn-ghost discord-link" href="#discord">Commander sur Discord</a>
-        </article>
         <article class="offer featured">
-          <span class="tag">Le plus demandé</span>
-          <h3>Full Tweak</h3>
-          <div class="price">Prix à venir<span>Windows + BIOS, le combo complet</span></div>
-          <ul><li>Tout le pack Essentiel</li><li>Réglages BIOS</li><li>Réglages réseau et latence</li><li>Configuration de tes jeux</li></ul>
-          <a class="btn btn-main discord-link" href="#discord">Demander un devis</a>
+          <span class="tag">Disponible</span>
+          <h3>Optimisation Windows</h3>
+          <div class="price">5 €<span>Paiement via PayPal · suivi 1 mois inclus</span></div>
+          <ul><li>Optimisation complète de Windows</li><li>Optimisation du registre Windows</li><li>Installation et optimisation des pilotes NVIDIA</li><li>Désactivation totale des économies d'énergie</li><li>Plan d'alimentation custom</li><li>Optimisation du stockage (SSD, HDD)</li></ul>
+          <a class="btn btn-main discord-link" href="#discord">Commander sur Discord</a>
         </article>
-        <article class="offer">
-          <span class="tag">Max</span>
-          <h3>Overclock + Stream</h3>
-          <div class="price">Prix à venir<span>Pour aller chercher chaque FPS</span></div>
-          <ul><li>Tout le pack Full Tweak</li><li>Overclock CPU / GPU / RAM</li><li>Setup OBS complet</li></ul>
-          <a class="btn btn-ghost discord-link" href="#discord">Demander un devis</a>
+        <article class="offer soon">
+          <span class="tag">Bientôt</span>
+          <h3>Les prochaines offres</h3>
+          <div class="price">Bientôt disponible<span>Les tarifs seront annoncés sur le Discord</span></div>
+          <ul><li>Réglages BIOS</li><li>Overclock CPU / GPU / RAM</li><li>Nettoyage complet</li><li>Setup streaming OBS</li></ul>
+          <a class="btn btn-ghost discord-link" href="#discord">Suivre les annonces sur Discord</a>
         </article>
       </div>
     </div>
