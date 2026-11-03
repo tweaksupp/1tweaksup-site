@@ -349,7 +349,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <div class="offers">
         <article class="offer featured">
           <span class="tag" id="offer-tag">🔥 Offre d'ouverture</span>
-          <div class="countdown" id="cd">Fin de l'offre le mardi 10 novembre à 23 h 59</div>
+          <div class="countdown" id="cd">Offre de <b>7 j 00 h 00 min 00 s</b> · démarre à l'ouverture officielle</div>
           <h3>Optimisation Windows</h3>
           <div class="price" id="offer-price"><s class="old">14,99 €</s> 5 €<span>Prix d'ouverture valable 1 semaine seulement, puis 14,99 € · PayPal · suivi 1 mois inclus</span></div>
           <ul><li>Optimisation complète de Windows</li><li>Optimisation du registre Windows</li><li>Installation et optimisation des pilotes NVIDIA</li><li>Désactivation totale des économies d'énergie</li><li>Plan d'alimentation custom</li><li>Optimisation du stockage (SSD, HDD)</li></ul>
@@ -449,11 +449,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 <script>
 /* Mets ton lien d'invitation Discord ici (ex : https://discord.gg/xxxxxx) */
 const DISCORD_URL = "https://discord.gg/VhVEHvJnXa";
-/* Compte à rebours de l'offre d'ouverture : fin le 10/11/2026 à 23:59 (heure de Paris) */
+/* Compte à rebours de l'offre d'ouverture.
+   START = null : figé à 7 jours (ouverture pas encore lancée).
+   Pour lancer : START = Date.UTC(année, mois-1, jour, heure-UTC, minute) */
 (function(){
-  const END = Date.UTC(2026, 10, 10, 22, 59, 59);
+  const START = null;
   const cd = document.getElementById("cd");
-  if (!cd) return;
+  if (!cd || START === null) return;
+  const END = START + 7 * 864e5;
   const pad = n => String(n).padStart(2, "0");
   function tick(){
     const left = END - Date.now();
