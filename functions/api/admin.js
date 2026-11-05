@@ -12,11 +12,40 @@ async function authorized(request, env) {
   return diff === 0;
 }
 
+// Blocage après 3 mauvais mots de passe : 1 heure, par adresse IP.
+const MAX_FAILS = 3;
+const BLOCK_SECONDS = 3600;
+
 async function guard(request, env) {
   const missing = noStore(env); if (missing) return missing;
   if (!env.ADMIN_PASSWORD || env.ADMIN_PASSWORD.length < 8)
     return json(503, { ok: false, error: "Mot de passe admin non configuré dans Cloudflare (ADMIN_PASSWORD, 8 caractères minimum)." });
-  if (!(await authorized(request, env))) return json(401, { ok: false, error: "Mot de passe incorrect." });
+
+  const ip = request.headers.get("cf-connecting-ip") || "inconnue";
+  const failKey = "fail:" + ip;
+  const raw = await env.TWK.get(failKey);
+  const fails = raw ? JSON.parse(raw) : { count: 0, until: 0 };
+  const now = Date.now();
+
+  if (fails.until > now) {
+    const min = Math.ceil((fails.until - now) / 60000);
+    return json(429, { ok: false, error: `Trop d'essais ratés. Accès bloqué encore ${min} min.` });
+  }
+
+  if (!(await authorized(request, env))) {
+    fails.count = (fails.until && fails.until <= now) ? 1 : fails.count + 1;
+    fails.until = 0;
+    if (fails.count >= MAX_FAILS) {
+      fails.until = now + BLOCK_SECONDS * 1000;
+      await env.TWK.put(failKey, JSON.stringify(fails), { expirationTtl: BLOCK_SECONDS + 60 });
+      return json(429, { ok: false, error: "Trop d'essais ratés. Accès bloqué pendant 1 heure." });
+    }
+    await env.TWK.put(failKey, JSON.stringify(fails), { expirationTtl: BLOCK_SECONDS });
+    const left = MAX_FAILS - fails.count;
+    return json(401, { ok: false, error: `Mot de passe incorrect. Encore ${left} essai${left > 1 ? "s" : ""} avant blocage.` });
+  }
+
+  if (raw) await env.TWK.delete(failKey);
   return null;
 }
 
