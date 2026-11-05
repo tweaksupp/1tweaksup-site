@@ -1,15 +1,2 @@
 [build]
   publish = "public"
-  functions = "netlify/functions"
-
-[[headers]]
-  for = "/admin.html"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
-    Cache-Control = "no-store"
-
-[[headers]]
-  for = "/tweakupp.ps1"
-  [headers.values]
-    Content-Type = "text/plain; charset=utf-8"
-    Cache-Control = "no-cache"

@@ -4,7 +4,7 @@
 
 $ErrorActionPreference = 'Stop'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-$Api = 'https://tweaksupp.netlify.app/api/activate'
+$Api = 'https://tweakupp.pages.dev/api/activate'
 
 Add-Type -AssemblyName System.Windows.Forms, System.Drawing
 [System.Windows.Forms.Application]::EnableVisualStyles()
