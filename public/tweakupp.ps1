@@ -15,7 +15,14 @@ function Show-Msg($text, $icon = 'Information', $buttons = 'OK') {
 
 # --- Droits administrateur ---
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-if (-not $isAdmin) { Show-Msg "Lance TweakUpp en tant qu'administrateur (clic droit > Executer en tant qu'administrateur)." 'Warning'; exit 1 }
+if (-not $isAdmin) {
+  # Relance automatique en administrateur (utile au premier demarrage apres installation)
+  try {
+    $cmd = "[Net.ServicePointManager]::SecurityProtocol='Tls12'; iex (irm 'https://tweakupp-5u8.pages.dev/api/programme')"
+    Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', $cmd
+  } catch { Show-Msg "TweakUpp a besoin des droits administrateur. Relance-le et clique sur Oui." 'Warning' }
+  exit 0
+}
 
 # --- Fenetre de saisie de la cle ---
 function Ask-Key {
